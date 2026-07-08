@@ -184,6 +184,17 @@ ul { list-style: none; }
 .nav__link:not(.btn):hover { color: var(--primary); }
 .nav__link:not(.btn):hover::after { transform: scaleX(1); }
 
+.nav__link.btn {
+  background: #fff;
+  color: var(--primary);
+  box-shadow: 0 8px 20px -8px rgba(208, 49, 234, .5);
+}
+.nav__link.btn:hover {
+  background: #fff;
+  box-shadow: 0 12px 28px -8px rgba(208, 49, 234, .7);
+  transform: translateY(-2px);
+}
+
 .header__actions { display: flex; align-items: center; gap: 8px; }
 .icon-btn {
   width: 40px; height: 40px; display: grid; place-items: center;
@@ -531,14 +542,27 @@ ul { list-style: none; }
 .footer__col .contact__socials .soc { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.12); color: #fff; }
 .footer__bar { border-top: 1px solid rgba(255,255,255,.08); text-align: center; padding: 20px; font-size: .82rem; }
 
-/* ---------- Floating call button ---------- */
+/* ---------- Floating buttons ---------- */
 .fab {
-  position: fixed; right: 20px; bottom: 20px; z-index: 90;
+  position: fixed; z-index: 90;
   width: 58px; height: 58px; display: grid; place-items: center;
-  background: var(--grad-2); color: #fff; border-radius: 50%;
-  box-shadow: 0 12px 30px -8px rgba(208,49,234,.9); animation: glowPulse 2.6s infinite;
+  color: #fff; border-radius: 50%;
+  animation: glowPulse 2.6s infinite;
+  transition: transform .3s var(--ease);
 }
 .fab:hover { transform: scale(1.1) rotate(8deg); }
+
+.fab--wa {
+  left: 20px; bottom: 20px;
+  background: linear-gradient(135deg, #25D366, #20BA5C);
+  box-shadow: 0 12px 30px -8px rgba(37,211,102,.8);
+}
+
+.fab--call {
+  right: 20px; bottom: 20px;
+  background: var(--grad-2);
+  box-shadow: 0 12px 30px -8px rgba(208,49,234,.9);
+}
 
 /* ============================================================
    Reveal animations
