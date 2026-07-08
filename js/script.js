@@ -94,7 +94,8 @@
     });
   });
 
-  /* ---------- Contact form ---------- */
+  /* ---------- Contact form (mailto delivery) ---------- */
+  const CONTACT_EMAIL = 'info@cleopatrainflatables.co.uk';
   const form = document.getElementById('callbackForm');
   const msg = document.getElementById('formMsg');
   if (form) {
@@ -102,6 +103,11 @@
       e.preventDefault();
       const name = form.querySelector('#name');
       const phone = form.querySelector('#phone');
+      const email = form.querySelector('#email');
+      const product = form.querySelector('#product');
+      const message = form.querySelector('#message');
+
+      // validate required fields
       let ok = true;
       [name, phone].forEach((f) => {
         if (!f.value.trim()) {
@@ -112,9 +118,32 @@
         }
       });
       if (!ok) return;
+
+      // build a pre-filled email
+      const subject = `Callback request — ${name.value.trim()}`;
+      const bodyLines = [
+        `Name: ${name.value.trim()}`,
+        `Phone: ${phone.value.trim()}`,
+        `Email: ${email.value.trim() || '—'}`,
+        `Interested in: ${product.value || '—'}`,
+        '',
+        'Message:',
+        message.value.trim() || '—',
+        '',
+        '— Sent from cleopatrainflatables.co.uk',
+      ];
+      const href =
+        `mailto:${CONTACT_EMAIL}` +
+        `?subject=${encodeURIComponent(subject)}` +
+        `&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+
+      // open the visitor's email app
+      window.location.href = href;
+
+      // confirmation + reset
       msg.hidden = false;
       form.reset();
-      setTimeout(() => (msg.hidden = true), 6000);
+      setTimeout(() => (msg.hidden = true), 8000);
     });
   }
 
